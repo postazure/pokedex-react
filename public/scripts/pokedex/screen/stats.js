@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Screen extends React.Component {
+export default class Stats extends React.Component {
   render() {
     let pokemon = this.props.pokemon;
     return (

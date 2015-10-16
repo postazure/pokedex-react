@@ -19807,6 +19807,14 @@
 
 	var _statsJs2 = _interopRequireDefault(_statsJs);
 
+	var _typesJs = __webpack_require__(164);
+
+	var _typesJs2 = _interopRequireDefault(_typesJs);
+
+	var _movesJs = __webpack_require__(165);
+
+	var _movesJs2 = _interopRequireDefault(_movesJs);
+
 	var Screen = (function (_React$Component) {
 	  _inherits(Screen, _React$Component);
 
@@ -19834,26 +19842,13 @@
 	            { className: 'header' },
 	            pokemon.name
 	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { className: 'meta' },
-	            _react2['default'].createElement(
-	              'span',
-	              { className: 'date' },
-	              'Joined in 2013'
-	            )
-	          ),
+	          _react2['default'].createElement(_typesJs2['default'], { types: pokemon.types }),
 	          _react2['default'].createElement(_statsJs2['default'], { pokemon: pokemon })
 	        ),
 	        _react2['default'].createElement(
 	          'div',
 	          { className: 'extra content' },
-	          _react2['default'].createElement(
-	            'a',
-	            null,
-	            _react2['default'].createElement('i', { className: 'user icon' }),
-	            '22 Friends'
-	          )
+	          _react2['default'].createElement(_movesJs2['default'], { moves: pokemon.moves })
 	        )
 	      );
 	    }
@@ -19890,16 +19885,16 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var Screen = (function (_React$Component) {
-	  _inherits(Screen, _React$Component);
+	var Picture = (function (_React$Component) {
+	  _inherits(Picture, _React$Component);
 
-	  function Screen() {
-	    _classCallCheck(this, Screen);
+	  function Picture() {
+	    _classCallCheck(this, Picture);
 
-	    _get(Object.getPrototypeOf(Screen.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Picture.prototype), "constructor", this).apply(this, arguments);
 	  }
 
-	  _createClass(Screen, [{
+	  _createClass(Picture, [{
 	    key: "render",
 	    value: function render() {
 	      return _react2["default"].createElement(
@@ -19910,10 +19905,10 @@
 	    }
 	  }]);
 
-	  return Screen;
+	  return Picture;
 	})(_react2["default"].Component);
 
-	exports["default"] = Screen;
+	exports["default"] = Picture;
 	module.exports = exports["default"];
 
 /***/ },
@@ -19940,16 +19935,16 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var Screen = (function (_React$Component) {
-	  _inherits(Screen, _React$Component);
+	var Stats = (function (_React$Component) {
+	  _inherits(Stats, _React$Component);
 
-	  function Screen() {
-	    _classCallCheck(this, Screen);
+	  function Stats() {
+	    _classCallCheck(this, Stats);
 
-	    _get(Object.getPrototypeOf(Screen.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Stats.prototype), "constructor", this).apply(this, arguments);
 	  }
 
-	  _createClass(Screen, [{
+	  _createClass(Stats, [{
 	    key: "render",
 	    value: function render() {
 	      var pokemon = this.props.pokemon;
@@ -20020,10 +20015,131 @@
 	    }
 	  }]);
 
-	  return Screen;
+	  return Stats;
 	})(_react2["default"].Component);
 
-	exports["default"] = Screen;
+	exports["default"] = Stats;
+	module.exports = exports["default"];
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Types = (function (_React$Component) {
+	  _inherits(Types, _React$Component);
+
+	  function Types() {
+	    _classCallCheck(this, Types);
+
+	    _get(Object.getPrototypeOf(Types.prototype), "constructor", this).apply(this, arguments);
+	  }
+
+	  _createClass(Types, [{
+	    key: "render",
+	    value: function render() {
+	      var types = this.props.types.map(function (type) {
+	        return _react2["default"].createElement(
+	          "a",
+	          { className: "item" },
+	          type.name
+	        );
+	      });
+
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "ui horizontal bulleted link list" },
+	        types
+	      );
+	    }
+	  }]);
+
+	  return Types;
+	})(_react2["default"].Component);
+
+	exports["default"] = Types;
+	module.exports = exports["default"];
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Moves = (function (_React$Component) {
+	  _inherits(Moves, _React$Component);
+
+	  function Moves() {
+	    _classCallCheck(this, Moves);
+
+	    _get(Object.getPrototypeOf(Moves.prototype), "constructor", this).apply(this, arguments);
+	  }
+
+	  _createClass(Moves, [{
+	    key: "render",
+	    value: function render() {
+	      var moves = this.props.moves.map(function (move) {
+	        return _react2["default"].createElement(
+	          "a",
+	          { className: "item" },
+	          _react2["default"].createElement("i", { className: "lightning icon" }),
+	          _react2["default"].createElement(
+	            "div",
+	            { className: "content" },
+	            move.name
+	          )
+	        );
+	      });
+
+	      return _react2["default"].createElement(
+	        "div",
+	        { className: "ui list" },
+	        moves
+	      );
+	    }
+	  }]);
+
+	  return Moves;
+	})(_react2["default"].Component);
+
+	exports["default"] = Moves;
 	module.exports = exports["default"];
 
 /***/ }

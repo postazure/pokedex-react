@@ -1,6 +1,8 @@
 import React from 'react'
 import Picture from './picture.js'
 import Stats from './stats.js'
+import Types from './types.js'
+import Moves from './moves.js'
 
 export default class Screen extends React.Component {
   render() {
@@ -12,16 +14,11 @@ export default class Screen extends React.Component {
         <Picture image={pokemonImage}/>
         <div className="content">
           <a className="header">{pokemon.name}</a>
-          <div className="meta">
-            <span className="date">Joined in 2013</span>
-          </div>
+          <Types types={pokemon.types}/>
           <Stats pokemon={pokemon}/>
         </div>
         <div className="extra content">
-          <a>
-            <i className="user icon"></i>
-            22 Friends
-          </a>
+          <Moves moves={pokemon.moves}/>
         </div>
       </div>
     )
