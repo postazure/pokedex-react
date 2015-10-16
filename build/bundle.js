@@ -19688,13 +19688,31 @@
 	    _get(Object.getPrototypeOf(Pokedex.prototype), 'constructor', this).call(this);
 	    this.pokemonApiClient = new _pokemonApiClientJs2['default']();
 
-	    this.pokemonApiClient.getAllPokemon();
 	    this.state = {
-	      activePokemom: fixtureData
+	      activePokemon: {
+	        name: 'N/A',
+	        types: [],
+	        moves: []
+	      }
 	    };
+
+	    this.setPokemon = this.setPokemon.bind(this);
 	  }
 
 	  _createClass(Pokedex, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.setState({
+	        activePokemon: this.pokemonApiClient.getPokemon('Bulbasaur', this.setPokemon)
+	      });
+	    }
+	  }, {
+	    key: 'setPokemon',
+	    value: function setPokemon(pokemon) {
+	      console.log(this);
+	      this.setState({ activePokemon: pokemon });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2['default'].createElement(
@@ -19705,7 +19723,7 @@
 	          null,
 	          'Hello Pokedex'
 	        ),
-	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemom })
+	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemon })
 	      );
 	    }
 	  }]);
@@ -19714,72 +19732,6 @@
 	})(_react2['default'].Component);
 
 	exports['default'] = Pokedex;
-
-	var fixtureData = {
-	  "abilities": [{
-	    "name": "overgrow",
-	    "resource_uri": "/api/v1/ability/1/"
-	  }, {
-	    "name": "chlorophyll",
-	    "resource_uri": "/api/v1/ability/2/"
-	  }],
-	  "attack": 49,
-	  "catch_rate": 45,
-	  "created": "2013-11-02T12:08:25.745455",
-	  "defense": 49,
-	  "egg_cycles": 21,
-	  "egg_groups": [{
-	    "name": "Monster",
-	    "resource_uri": "/api/v1/egg/1/"
-	  }, {
-	    "name": "Grass",
-	    "resource_uri": "/api/v1/egg/8/"
-	  }],
-	  "ev_yield": "1 Sp Atk",
-	  "evolutions": {
-	    "level": 16,
-	    "method": "level up",
-	    "resource_uri": "/api/v1/pokemon/2/",
-	    "to": "Ivysaur"
-	  },
-	  "exp": 64,
-	  "growth_rate": "ms",
-	  "happiness": 70,
-	  "height": "2'4",
-	  "hp": 45,
-	  "male_female_ratio": "87.5/12.5",
-	  "modified": "2013-11-02T13:28:04.914889",
-	  "moves": [{
-	    "learn_type": "other",
-	    "name": "Tackle",
-	    "resource_uri": "/api/v1/move/1/"
-	  }, {
-	    "learn_type": "other",
-	    "name": "Growl",
-	    "resource_uri": "/api/v1/move/2/"
-	  }, {
-	    "learn_type": "level up",
-	    "level": 10,
-	    "name": "Vine whip",
-	    "resource_uri": "/api/v1/move/3/"
-	  }],
-	  "name": "Bulbasaur",
-	  "national_id": 1,
-	  "resource_uri": "/api/v1/pokemon/4/",
-	  "sp_atk": 65,
-	  "sp_def": 65,
-	  "species": "seed pokemon",
-	  "speed": 45,
-	  "total": 318,
-	  "types": [{
-	    "name": "grass",
-	    "resource_uri": "/api/v1/type/5/"
-	  }, {
-	    "name": "poison",
-	    "resource_uri": "/api/v1/type/8/"
-	  }],
-	  "weight": "15.2lbs"
-	};
 	module.exports = exports['default'];
 
 /***/ },
@@ -20177,6 +20129,7 @@
 
 	    var host = 'http://pokeapi.co/api/v1/';
 	    this.allPokemonURI = host + 'pokedex/1';
+	    this.pokemonURI = host + 'pokemon';
 	  }
 
 	  _createClass(PokemonApiClient, [{
@@ -20186,6 +20139,26 @@
 	        console.log(res.body.pokemon);
 	        console.error(err);
 	      });
+	    }
+	  }, {
+	    key: 'getPokemon',
+	    value: function getPokemon(name, state) {
+	      var id = 1;
+	      var uri = this.pokemonURI;
+
+	      _superagent2['default'].get(uri + '/' + id).end(function (err, res) {
+	        var pokemon = res.body;
+	        state(pokemon);
+	        console.error(err);
+	      });
+
+	      return pokemon;
+	    }
+	  }, {
+	    key: 'searchPokemon',
+	    value: function searchPokemon(name) {
+	      //TODO Remove hardcoded response with actual search method
+	      return 1;
 	    }
 	  }]);
 
