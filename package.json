@@ -1,0 +1,35 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "It's a reactjs pokedex",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/postazure/pokedex-react.git"
+  },
+  "keywords": [
+    "pokemon",
+    "pokedex",
+    "reactjs",
+    "react"
+  ],
+  "author": "Max Gordon && Heather Farley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/postazure/pokedex-react/issues"
+  },
+  "homepage": "https://github.com/postazure/pokedex-react#readme",
+  "devDependencies": {
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "webpack": "^1.12.2"
+  },
+  "dependencies": {
+    "react": "^0.14.0",
+    "semantic-ui-css": "^2.1.4",
+    "superagent": "^1.4.0"
+  }
+}
