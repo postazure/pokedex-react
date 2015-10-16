@@ -1,20 +1,24 @@
 import React from 'react'
 import Screen from './screen/screen.js'
+import PokemonApiClient from '../pokemon-api-client.js'
 
 export default class Pokedex extends React.Component  {
   constructor(){
     super();
+    this.pokemonApiClient = new PokemonApiClient;
+
+    this.pokemonApiClient.getAllPokemon();
     this.state = {
       activePokemom: fixtureData
     }
   }
+
   render() {
     return (
       <div>
         <h1>Hello Pokedex</h1>
         <Screen activePokemon={this.state.activePokemom}/>
       </div>
-
     )
   }
 }
