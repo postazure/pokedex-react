@@ -20089,8 +20089,12 @@
 
 	      return _react2["default"].createElement(
 	        "div",
-	        { className: "ui list" },
-	        moves
+	        { className: "ui segment scrolling height150" },
+	        _react2["default"].createElement(
+	          "div",
+	          { className: "ui list" },
+	          moves
+	        )
 	      );
 	    }
 	  }]);
