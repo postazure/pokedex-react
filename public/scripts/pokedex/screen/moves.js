@@ -12,11 +12,14 @@ export default class Moves extends React.Component {
         </a>
       );
     });
-    
+
     return (
-      <div className="ui segment scrolling height150">
-        <div className="ui list">
-          {moves}
+      <div>
+        <h3>Moves</h3>
+        <div className="ui segment scrolling height150">
+          <div className="ui list">
+            {moves}
+          </div>
         </div>
       </div>
     );

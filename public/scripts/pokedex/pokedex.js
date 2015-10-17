@@ -1,6 +1,7 @@
 import React from 'react'
 import Screen from './screen/screen.js'
 import PokemonApiClient from '../pokemon-api-client.js'
+import Search from './search/searchbox.js'
 
 export default class Pokedex extends React.Component  {
   constructor(){
@@ -12,7 +13,8 @@ export default class Pokedex extends React.Component  {
         name: 'N/A',
         types: [],
         moves: []
-      }
+      },
+      pokemonList: []
     };
 
     this.setPokemon = this.setPokemon.bind(this);
@@ -21,13 +23,13 @@ export default class Pokedex extends React.Component  {
   componentDidMount(){
     this.setState(
       {
-        activePokemon: this.pokemonApiClient.getPokemon('Bulbasaur', this.setPokemon)
+        activePokemon: this.pokemonApiClient.getPokemon('Bulbasaur', this.setPokemon),
+        pokemonList: this.pokemonApiClient.getAllPokemon()
       }
     );
   }
 
   setPokemon(pokemon) {
-    console.log(this);
     this.setState({activePokemon: pokemon})
   }
 
@@ -35,6 +37,7 @@ export default class Pokedex extends React.Component  {
     return (
       <div>
         <h1>Hello Pokedex</h1>
+        <Search pokemonList={this.state.pokemonList}/>
         <Screen activePokemon={this.state.activePokemon}/>
       </div>
     )

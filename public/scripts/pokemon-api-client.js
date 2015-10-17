@@ -32,6 +32,7 @@ export default class PokemonApiClient {
 
   searchPokemon(name) {
     //TODO Remove hardcoded response with actual search method
+
     return 1;
   }
 }
