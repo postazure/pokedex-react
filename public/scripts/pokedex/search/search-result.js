@@ -1,8 +1,11 @@
 import React from 'react'
+import Helpers from '../helpers.js'
 
 export default class SearchResult extends React.Component {
   selectItem(id_url) {
-    let id = this.getIDFromURL(id_url);
+    let helpers = new Helpers;
+
+    let id = helpers.getIDfromResourceURI(id_url, 'pokemon');
     let pokedex = this.props.pokedex;
 
     this.props.searchbox.clearForm();
@@ -10,13 +13,6 @@ export default class SearchResult extends React.Component {
     pokedex.setState(
       {activePokemon: pokedex.pokemonApiClient.getPokemon(id, pokedex.setPokemon)}
     );
-  }
-
-  getIDFromURL(url) {
-    let id = url
-              .replace('api/v1/pokemon/', '')
-              .replace('/', '');
-    return (id);
   }
 
   render() {

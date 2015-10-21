@@ -5,7 +5,7 @@ export default class Stats extends React.Component {
     let pokemon = this.props.pokemon;
     return (
       <div className="description">
-        <table className="ui celled padded small table">
+        <table className="ui celled small table">
           <thead>
             <tr>
               <th>Attack</th>
