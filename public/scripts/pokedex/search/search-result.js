@@ -5,6 +5,8 @@ export default class SearchResult extends React.Component {
     let id = this.getIDFromURL(id_url);
     let pokedex = this.props.pokedex;
 
+    this.props.searchbox.clearForm();
+
     pokedex.setState(
       {activePokemon: pokedex.pokemonApiClient.getPokemon(id, pokedex.setPokemon)}
     );

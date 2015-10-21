@@ -2,7 +2,8 @@ import React from 'react'
 
 export default class Moves extends React.Component {
   render() {
-    let moves = this.props.moves.map(function(move) {
+    let movesList = this.props.moves || [];
+    let moves = movesList.map(function(move) {
       return(
         <a className="item">
           <i className="lightning icon"></i>

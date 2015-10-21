@@ -6,20 +6,20 @@ export default class SearchResults extends React.Component {
 
     let results = this.props.pokemonList.map((pokemon) => {
       return (
-        <SearchResult pokemon={pokemon} pokedex={this.props.pokedex}/>
+        <SearchResult searchbox={this.props.searchbox} pokemon={pokemon} pokedex={this.props.pokedex}/>
       );
     });
 
     let classes;
 
     if (results[0] === undefined) {
-      classes = 'results transition hidden'
+      classes = 'hidden'
     } else {
-      classes = 'results transition visible'
+      classes = 'visible'
     }
 
     return (
-      <div className={classes}>
+      <div className={'scrolling height450 results transition ' + classes} >
         {results}
       </div>
     )

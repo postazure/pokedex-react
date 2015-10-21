@@ -19734,12 +19734,7 @@
 	    value: function render() {
 	      return _react2['default'].createElement(
 	        'div',
-	        null,
-	        _react2['default'].createElement(
-	          'h1',
-	          null,
-	          'Hello Pokedex'
-	        ),
+	        { className: 'ui centered card' },
 	        _react2['default'].createElement(_searchSearchboxJs2['default'], { pokemonList: this.state.pokemonList, pokedex: this }),
 	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemon, pokemonImage: this.state.pokemonImage })
 	      );
@@ -19798,18 +19793,23 @@
 	  function Screen() {
 	    _classCallCheck(this, Screen);
 
-	    _get(Object.getPrototypeOf(Screen.prototype), 'constructor', this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Screen.prototype), 'constructor', this).call(this);
+	    this.defaultPokemon = {
+	      name: 'N/A',
+	      types: [],
+	      moves: []
+	    };
 	  }
 
 	  _createClass(Screen, [{
 	    key: 'render',
 	    value: function render() {
-	      var pokemon = this.props.activePokemon;
+	      var pokemon = this.props.activePokemon || this.defaultPokemon;
 	      var pokemonImage = this.props.pokemonImage;
 
 	      return _react2['default'].createElement(
 	        'div',
-	        { className: 'ui centered card' },
+	        { className: 'ui card' },
 	        _react2['default'].createElement(_pictureJs2['default'], { image: pokemonImage }),
 	        _react2['default'].createElement(
 	          'div',
@@ -20033,7 +20033,9 @@
 	  _createClass(Types, [{
 	    key: "render",
 	    value: function render() {
-	      var types = this.props.types.map(function (type) {
+	      var typesList = this.props.types || [];
+
+	      var types = typesList.map(function (type) {
 	        return _react2["default"].createElement(
 	          "a",
 	          { className: "item" },
@@ -20091,7 +20093,8 @@
 	  _createClass(Moves, [{
 	    key: "render",
 	    value: function render() {
-	      var moves = this.props.moves.map(function (move) {
+	      var movesList = this.props.moves || [];
+	      var moves = movesList.map(function (move) {
 	        return _react2["default"].createElement(
 	          "a",
 	          { className: "item" },
@@ -21596,6 +21599,7 @@
 	      searchResultsList: []
 	    };
 	    this.setResultsList = this.setResultsList.bind(this);
+	    this.clearForm = this.clearForm.bind(this);
 	  }
 
 	  _createClass(Searchbox, [{
@@ -21603,7 +21607,7 @@
 	    value: function setResultsList() {
 	      var query = _react2['default'].findDOMNode(this.refs.searchInput).value.trim();
 
-	      if (query.length < 3) {
+	      if (query.length < 1) {
 	        return;
 	      }
 
@@ -21618,18 +21622,24 @@
 	      this.setState({ searchResultsList: matchedNames });
 	    }
 	  }, {
+	    key: 'clearForm',
+	    value: function clearForm() {
+	      this.refs.searchInput.value = '';
+	      this.state.searchResultsList = [];
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2['default'].createElement(
 	        'div',
-	        { className: 'ui search' },
+	        { className: 'ui fluid search' },
 	        _react2['default'].createElement(
 	          'div',
-	          { className: 'ui icon input' },
-	          _react2['default'].createElement('input', { onKeyUp: this.setResultsList, ref: 'searchInput', className: 'prompt', type: 'text', placeholder: 'Search Pokemon...' }),
+	          { className: 'ui fluid icon input' },
+	          _react2['default'].createElement('input', { onKeyUp: this.setResultsList, ref: 'searchInput', type: 'text', placeholder: 'Search Pokemon...' }),
 	          _react2['default'].createElement('i', { className: 'search icon' })
 	        ),
-	        _react2['default'].createElement(_searchResults2['default'], { pokemonList: this.state.searchResultsList, pokedex: this.props.pokedex })
+	        _react2['default'].createElement(_searchResults2['default'], { pokemonList: this.state.searchResultsList, searchbox: this, pokedex: this.props.pokedex })
 	      );
 	    }
 	  }]);
@@ -21683,20 +21693,20 @@
 	      var _this = this;
 
 	      var results = this.props.pokemonList.map(function (pokemon) {
-	        return _react2['default'].createElement(_searchResultJs2['default'], { pokemon: pokemon, pokedex: _this.props.pokedex });
+	        return _react2['default'].createElement(_searchResultJs2['default'], { searchbox: _this.props.searchbox, pokemon: pokemon, pokedex: _this.props.pokedex });
 	      });
 
 	      var classes = undefined;
 
 	      if (results[0] === undefined) {
-	        classes = 'results transition hidden';
+	        classes = 'hidden';
 	      } else {
-	        classes = 'results transition visible';
+	        classes = 'visible';
 	      }
 
 	      return _react2['default'].createElement(
 	        'div',
-	        { className: classes },
+	        { className: 'scrolling height450 results transition ' + classes },
 	        results
 	      );
 	    }
@@ -21746,6 +21756,8 @@
 	    value: function selectItem(id_url) {
 	      var id = this.getIDFromURL(id_url);
 	      var pokedex = this.props.pokedex;
+
+	      this.props.searchbox.clearForm();
 
 	      pokedex.setState({ activePokemon: pokedex.pokemonApiClient.getPokemon(id, pokedex.setPokemon) });
 	    }

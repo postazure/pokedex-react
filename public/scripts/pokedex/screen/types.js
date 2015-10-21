@@ -2,7 +2,9 @@ import React from 'react'
 
 export default class Types extends React.Component {
   render() {
-    let types = this.props.types.map(function(type) {
+    let typesList = this.props.types || [];
+
+    let types = typesList.map(function(type) {
       return(
         <a className="item">
           {type.name}

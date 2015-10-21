@@ -5,12 +5,21 @@ import Types from './types.js'
 import Moves from './moves.js'
 
 export default class Screen extends React.Component {
+  constructor(){
+    super();
+    this.defaultPokemon = {
+      name: 'N/A',
+      types: [],
+      moves: []
+    }
+  }
+
   render() {
-    let pokemon = this.props.activePokemon;
+    let pokemon = this.props.activePokemon || this.defaultPokemon;
     let pokemonImage = this.props.pokemonImage;
 
     return (
-      <div className="ui centered card">
+      <div className="ui card">
         <Picture image={pokemonImage}/>
         <div className="content">
           <a className="header">{pokemon.name}</a>

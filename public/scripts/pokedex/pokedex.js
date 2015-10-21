@@ -47,8 +47,7 @@ export default class Pokedex extends React.Component  {
 
   render() {
     return (
-      <div>
-        <h1>Hello Pokedex</h1>
+      <div className="ui centered card">
         <Search pokemonList={this.state.pokemonList} pokedex={this} />
         <Screen activePokemon={this.state.activePokemon} pokemonImage={this.state.pokemonImage}/>
       </div>

@@ -8,12 +8,13 @@ export default class Searchbox extends React.Component {
       searchResultsList: []
     };
     this.setResultsList = this.setResultsList.bind(this);
+    this.clearForm = this.clearForm.bind(this);
   }
 
   setResultsList() {
     let query = React.findDOMNode(this.refs.searchInput).value.trim();
 
-    if (query.length < 3) {return;}
+    if (query.length < 1) {return;}
 
     let matchedNames = [];
 
@@ -26,15 +27,20 @@ export default class Searchbox extends React.Component {
     this.setState({searchResultsList: matchedNames})
   }
 
+  clearForm() {
+    this.refs.searchInput.value = '';
+    this.state.searchResultsList = [];
+  }
+
 
   render() {
     return (
-      <div className="ui search">
-        <div className="ui icon input">
-          <input onKeyUp={this.setResultsList} ref="searchInput" className="prompt" type="text" placeholder="Search Pokemon..."/>
+      <div className="ui fluid search">
+        <div className="ui fluid icon input">
+          <input onKeyUp={this.setResultsList} ref="searchInput" type="text" placeholder="Search Pokemon..."/>
           <i className="search icon"></i>
         </div>
-        <SearchResults pokemonList={this.state.searchResultsList} pokedex={this.props.pokedex} />
+        <SearchResults pokemonList={this.state.searchResultsList} searchbox={this} pokedex={this.props.pokedex} />
       </div>
     )
   }
