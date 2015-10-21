@@ -19817,6 +19817,8 @@
 	          _react2['default'].createElement(
 	            'a',
 	            { className: 'header' },
+	            pokemon.pkdx_id,
+	            ' ',
 	            pokemon.name
 	          ),
 	          _react2['default'].createElement(_typesJs2['default'], { types: pokemon.types }),

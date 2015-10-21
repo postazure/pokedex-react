@@ -22,7 +22,7 @@ export default class Screen extends React.Component {
       <div className="ui card">
         <Picture image={pokemonImage}/>
         <div className="content">
-          <a className="header">{pokemon.name}</a>
+          <a className="header">{pokemon.pkdx_id} {pokemon.name}</a>
           <Types types={pokemon.types}/>
           <Stats pokemon={pokemon}/>
         </div>
