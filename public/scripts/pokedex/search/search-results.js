@@ -3,24 +3,25 @@ import SearchResult from './search-result.js'
 
 export default class SearchResults extends React.Component {
   render() {
-    let resultsList;
 
-    if (this.props.pokemonList === []) {
-      resultsList = <div className="results transition hidden"></div>;
+    let results = this.props.pokemonList.map((pokemon) => {
+      return (
+        <SearchResult pokemon={pokemon} pokedex={this.props.pokedex}/>
+      );
+    });
+
+    let classes;
+
+    if (results[0] === undefined) {
+      classes = 'results transition hidden'
     } else {
-      let results = this.props.pokemonList.map((pokemon) => {
-        return (
-          <SearchResult pokemon={pokemon} pokedex={this.props.pokedex}/>
-        );
-      });
-
-      resultsList = (
-        <div className="results transition visible">
-          {results}
-        </div>
-      )
+      classes = 'results transition visible'
     }
 
-    return (resultsList);
+    return (
+      <div className={classes}>
+        {results}
+      </div>
+    )
   }
 }

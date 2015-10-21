@@ -19620,7 +19620,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pokedexPokedexJs = __webpack_require__(159);
+	var _pokedexPokedexJs = __webpack_require__(158);
 
 	var _pokedexPokedexJs2 = _interopRequireDefault(_pokedexPokedexJs);
 
@@ -19647,8 +19647,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 158 */,
-/* 159 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19671,15 +19670,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _screenScreenJs = __webpack_require__(160);
+	var _screenScreenJs = __webpack_require__(159);
 
 	var _screenScreenJs2 = _interopRequireDefault(_screenScreenJs);
 
-	var _pokemonApiClientJs = __webpack_require__(168);
+	var _pokemonApiClientJs = __webpack_require__(164);
 
 	var _pokemonApiClientJs2 = _interopRequireDefault(_pokemonApiClientJs);
 
-	var _searchSearchboxJs = __webpack_require__(172);
+	var _searchSearchboxJs = __webpack_require__(168);
 
 	var _searchSearchboxJs2 = _interopRequireDefault(_searchSearchboxJs);
 
@@ -19747,7 +19746,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 160 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19770,19 +19769,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _pictureJs = __webpack_require__(162);
+	var _pictureJs = __webpack_require__(160);
 
 	var _pictureJs2 = _interopRequireDefault(_pictureJs);
 
-	var _statsJs = __webpack_require__(163);
+	var _statsJs = __webpack_require__(161);
 
 	var _statsJs2 = _interopRequireDefault(_statsJs);
 
-	var _typesJs = __webpack_require__(164);
+	var _typesJs = __webpack_require__(162);
 
 	var _typesJs2 = _interopRequireDefault(_typesJs);
 
-	var _movesJs = __webpack_require__(165);
+	var _movesJs = __webpack_require__(163);
 
 	var _movesJs2 = _interopRequireDefault(_movesJs);
 
@@ -19832,8 +19831,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 161 */,
-/* 162 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19883,7 +19881,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 163 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -19993,7 +19991,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 164 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20051,7 +20049,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 165 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20127,9 +20125,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 166 */,
-/* 167 */,
-/* 168 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20144,7 +20140,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _superagent = __webpack_require__(169);
+	var _superagent = __webpack_require__(165);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -20193,15 +20189,15 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 169 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(170);
-	var reduce = __webpack_require__(171);
+	var Emitter = __webpack_require__(166);
+	var reduce = __webpack_require__(167);
 
 	/**
 	 * Root reference for iframes.
@@ -21356,7 +21352,7 @@
 
 
 /***/ },
-/* 170 */
+/* 166 */
 /***/ function(module, exports) {
 
 	
@@ -21526,7 +21522,7 @@
 
 
 /***/ },
-/* 171 */
+/* 167 */
 /***/ function(module, exports) {
 
 	
@@ -21555,7 +21551,7 @@
 	};
 
 /***/ },
-/* 172 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21578,7 +21574,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _searchResults = __webpack_require__(174);
+	var _searchResults = __webpack_require__(169);
 
 	var _searchResults2 = _interopRequireDefault(_searchResults);
 
@@ -21638,8 +21634,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 173 */,
-/* 174 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21662,7 +21657,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _searchResultJs = __webpack_require__(175);
+	var _searchResultJs = __webpack_require__(170);
 
 	var _searchResultJs2 = _interopRequireDefault(_searchResultJs);
 
@@ -21680,23 +21675,23 @@
 	    value: function render() {
 	      var _this = this;
 
-	      var resultsList = undefined;
+	      var results = this.props.pokemonList.map(function (pokemon) {
+	        return _react2['default'].createElement(_searchResultJs2['default'], { pokemon: pokemon, pokedex: _this.props.pokedex });
+	      });
 
-	      if (this.props.pokemonList === []) {
-	        resultsList = _react2['default'].createElement('div', { className: 'results transition hidden' });
+	      var classes = undefined;
+
+	      if (results[0] === undefined) {
+	        classes = 'results transition hidden';
 	      } else {
-	        var results = this.props.pokemonList.map(function (pokemon) {
-	          return _react2['default'].createElement(_searchResultJs2['default'], { pokemon: pokemon, pokedex: _this.props.pokedex });
-	        });
-
-	        resultsList = _react2['default'].createElement(
-	          'div',
-	          { className: 'results transition visible' },
-	          results
-	        );
+	        classes = 'results transition visible';
 	      }
 
-	      return resultsList;
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: classes },
+	        results
+	      );
 	    }
 	  }]);
 
@@ -21707,7 +21702,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 175 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
