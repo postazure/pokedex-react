@@ -30,5 +30,4 @@ export default class PokemonApiClient {
         if (err) {console.error(err);}
     });
   };
-
 }

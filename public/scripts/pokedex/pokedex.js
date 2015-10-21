@@ -3,6 +3,8 @@ import Screen from './screen/screen.js'
 import PokemonApiClient from '../pokemon-api-client.js'
 import Search from './search/searchbox.js'
 
+const defaultImage = 'https://d13pix9kaak6wt.cloudfront.net/avatar/whosthatpokemon_1349921927_96.png';
+
 export default class Pokedex extends React.Component  {
   constructor(){
     super();
@@ -10,11 +12,12 @@ export default class Pokedex extends React.Component  {
 
     this.state = {
       activePokemon: {
-        name: 'N/A',
+        name: 'Please Search',
         types: [],
         moves: []
       },
-      pokemonList: []
+      pokemonList: [],
+      pokemonImage: defaultImage
     };
 
     this.setPokemon = this.setPokemon.bind(this);
@@ -24,14 +27,18 @@ export default class Pokedex extends React.Component  {
   componentDidMount(){
     this.setState(
       {
-        activePokemon: this.pokemonApiClient.getPokemon(1, this.setPokemon),
+        activePokemon: {},
         pokemonList: this.pokemonApiClient.getAllPokemon(this.setPokemonList)
       }
     );
   }
 
   setPokemon(pokemon) {
-    this.setState({activePokemon: pokemon})
+    let id = pokemon.pkdx_id;
+    this.setState({
+      activePokemon: pokemon,
+      pokemonImage: `http://pokeapi.co/media/img/${id}.png`
+    })
   }
 
   setPokemonList(pokemonList) {
@@ -43,7 +50,7 @@ export default class Pokedex extends React.Component  {
       <div>
         <h1>Hello Pokedex</h1>
         <Search pokemonList={this.state.pokemonList} pokedex={this} />
-        <Screen activePokemon={this.state.activePokemon}/>
+        <Screen activePokemon={this.state.activePokemon} pokemonImage={this.state.pokemonImage}/>
       </div>
     )
   }

@@ -7,7 +7,7 @@ import Moves from './moves.js'
 export default class Screen extends React.Component {
   render() {
     let pokemon = this.props.activePokemon;
-    let pokemonImage = "http://vignette1.wikia.nocookie.net/pokemon/images/b/b8/001Bulbasaur_Dream.png/revision/latest?cb=20140903033758";
+    let pokemonImage = this.props.pokemonImage;
 
     return (
       <div className="ui centered card">

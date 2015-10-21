@@ -19682,6 +19682,8 @@
 
 	var _searchSearchboxJs2 = _interopRequireDefault(_searchSearchboxJs);
 
+	var defaultImage = 'https://d13pix9kaak6wt.cloudfront.net/avatar/whosthatpokemon_1349921927_96.png';
+
 	var Pokedex = (function (_React$Component) {
 	  _inherits(Pokedex, _React$Component);
 
@@ -19693,11 +19695,12 @@
 
 	    this.state = {
 	      activePokemon: {
-	        name: 'N/A',
+	        name: 'Please Search',
 	        types: [],
 	        moves: []
 	      },
-	      pokemonList: []
+	      pokemonList: [],
+	      pokemonImage: defaultImage
 	    };
 
 	    this.setPokemon = this.setPokemon.bind(this);
@@ -19708,14 +19711,18 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.setState({
-	        activePokemon: this.pokemonApiClient.getPokemon(1, this.setPokemon),
+	        activePokemon: {},
 	        pokemonList: this.pokemonApiClient.getAllPokemon(this.setPokemonList)
 	      });
 	    }
 	  }, {
 	    key: 'setPokemon',
 	    value: function setPokemon(pokemon) {
-	      this.setState({ activePokemon: pokemon });
+	      var id = pokemon.pkdx_id;
+	      this.setState({
+	        activePokemon: pokemon,
+	        pokemonImage: 'http://pokeapi.co/media/img/' + id + '.png'
+	      });
 	    }
 	  }, {
 	    key: 'setPokemonList',
@@ -19734,7 +19741,7 @@
 	          'Hello Pokedex'
 	        ),
 	        _react2['default'].createElement(_searchSearchboxJs2['default'], { pokemonList: this.state.pokemonList, pokedex: this }),
-	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemon })
+	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemon, pokemonImage: this.state.pokemonImage })
 	      );
 	    }
 	  }]);
@@ -19798,7 +19805,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var pokemon = this.props.activePokemon;
-	      var pokemonImage = "http://vignette1.wikia.nocookie.net/pokemon/images/b/b8/001Bulbasaur_Dream.png/revision/latest?cb=20140903033758";
+	      var pokemonImage = this.props.pokemonImage;
 
 	      return _react2['default'].createElement(
 	        'div',
