@@ -19674,7 +19674,7 @@
 
 	var _screenScreenJs2 = _interopRequireDefault(_screenScreenJs);
 
-	var _pokemonApiClientJs = __webpack_require__(164);
+	var _pokemonApiClientJs = __webpack_require__(344);
 
 	var _pokemonApiClientJs2 = _interopRequireDefault(_pokemonApiClientJs);
 
@@ -20079,85 +20079,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-	var _superagent = __webpack_require__(165);
-
-	var _superagent2 = _interopRequireDefault(_superagent);
-
-	var PokemonApiClient = (function () {
-	  function PokemonApiClient() {
-	    _classCallCheck(this, PokemonApiClient);
-
-	    var host = 'http://pokeapi.co/api/v1/';
-	    this.allPokemonURI = host + 'pokedex/1';
-	    this.pokemonURI = host + 'pokemon';
-	    this.typeURI = host + 'type';
-	  }
-
-	  _createClass(PokemonApiClient, [{
-	    key: 'getAllPokemon',
-	    value: function getAllPokemon(state) {
-	      _superagent2['default'].get(this.allPokemonURI).end(function (err, res) {
-	        var pokemon = res.body.pokemon;
-	        if (pokemon) {
-	          state(pokemon);
-	        }
-	        if (err) {
-	          console.error(err);
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'getPokemon',
-	    value: function getPokemon(id, state) {
-	      var uri = this.pokemonURI;
-	      _superagent2['default'].get(uri + '/' + id).end(function (err, res) {
-	        var pokemon = res.body;
-	        if (pokemon) {
-	          state(pokemon);
-	        }
-	        if (err) {
-	          console.error(err);
-	        }
-	      });
-	    }
-	  }, {
-	    key: 'getType',
-	    value: function getType(id, state) {
-	      var uri = this.typeURI;
-	      _superagent2['default'].get(uri + '/' + id).end(function (err, res) {
-	        var type = res.body;
-	        if (type) {
-	          state(type);
-	        }
-	        if (err) {
-	          console.error(err);
-	        }
-	      });
-	    }
-	  }]);
-
-	  return PokemonApiClient;
-	})();
-
-	exports['default'] = PokemonApiClient;
-	module.exports = exports['default'];
-
-/***/ },
+/* 164 */,
 /* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21960,7 +21882,7 @@
 
 	var _helpersJs2 = _interopRequireDefault(_helpersJs);
 
-	var _pokemonApiClientJs = __webpack_require__(164);
+	var _pokemonApiClientJs = __webpack_require__(344);
 
 	var _pokemonApiClientJs2 = _interopRequireDefault(_pokemonApiClientJs);
 
@@ -22238,6 +22160,85 @@
 	})();
 
 	exports['default'] = Helpers;
+	module.exports = exports['default'];
+
+/***/ },
+/* 344 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _superagent = __webpack_require__(165);
+
+	var _superagent2 = _interopRequireDefault(_superagent);
+
+	var PokemonApiClient = (function () {
+	  function PokemonApiClient() {
+	    _classCallCheck(this, PokemonApiClient);
+
+	    var host = 'http://pokeapi.co/api/v1/';
+	    this.allPokemonURI = host + 'pokedex/1';
+	    this.pokemonURI = host + 'pokemon';
+	    this.typeURI = host + 'type';
+	  }
+
+	  _createClass(PokemonApiClient, [{
+	    key: 'getAllPokemon',
+	    value: function getAllPokemon(state) {
+	      _superagent2['default'].get(this.allPokemonURI).end(function (err, res) {
+	        var pokemon = res.body.pokemon;
+	        if (pokemon) {
+	          state(pokemon);
+	        }
+	        if (err) {
+	          console.error(err);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'getPokemon',
+	    value: function getPokemon(id, state) {
+	      var uri = this.pokemonURI;
+	      _superagent2['default'].get(uri + '/' + id).end(function (err, res) {
+	        var pokemon = res.body;
+	        if (pokemon) {
+	          state(pokemon);
+	        }
+	        if (err) {
+	          console.error(err);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'getType',
+	    value: function getType(id, state) {
+	      var uri = this.typeURI;
+	      _superagent2['default'].get(uri + '/' + id).end(function (err, res) {
+	        var type = res.body;
+	        if (type) {
+	          state(type);
+	        }
+	        if (err) {
+	          console.error(err);
+	        }
+	      });
+	    }
+	  }]);
+
+	  return PokemonApiClient;
+	})();
+
+	exports['default'] = PokemonApiClient;
 	module.exports = exports['default'];
 
 /***/ }

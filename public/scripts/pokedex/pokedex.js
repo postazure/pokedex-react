@@ -1,6 +1,6 @@
 import React from 'react'
 import Screen from './screen/screen.js'
-import PokemonApiClient from '../pokemon-api-client.js'
+import PokemonApiClient from './pokemon-api-client.js'
 import Search from './search/searchbox.js'
 
 const defaultImage = 'https://d13pix9kaak6wt.cloudfront.net/avatar/whosthatpokemon_1349921927_96.png';
