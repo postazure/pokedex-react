@@ -18,13 +18,14 @@ export default class Pokedex extends React.Component  {
     };
 
     this.setPokemon = this.setPokemon.bind(this);
+    this.setPokemonList = this.setPokemonList.bind(this);
   }
 
   componentDidMount(){
     this.setState(
       {
-        activePokemon: this.pokemonApiClient.getPokemon('Bulbasaur', this.setPokemon),
-        pokemonList: this.pokemonApiClient.getAllPokemon()
+        activePokemon: this.pokemonApiClient.getPokemon(1, this.setPokemon),
+        pokemonList: this.pokemonApiClient.getAllPokemon(this.setPokemonList)
       }
     );
   }
@@ -33,11 +34,15 @@ export default class Pokedex extends React.Component  {
     this.setState({activePokemon: pokemon})
   }
 
+  setPokemonList(pokemonList) {
+    this.setState({pokemonList: pokemonList})
+  }
+
   render() {
     return (
       <div>
         <h1>Hello Pokedex</h1>
-        <Search pokemonList={this.state.pokemonList}/>
+        <Search pokemonList={this.state.pokemonList} pokedex={this} />
         <Screen activePokemon={this.state.activePokemon}/>
       </div>
     )

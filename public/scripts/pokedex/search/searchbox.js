@@ -1,20 +1,40 @@
 import React from 'react'
+import SearchResults from './search-results'
 
 export default class Searchbox extends React.Component {
-  componentDidMount() {
-    let input = this.refs.searchInput;
-
-    //input.search({source: this.props.pokemonList});
+  constructor(props) {
+    super();
+    this.state = {
+      searchResultsList: []
+    };
+    this.setResultsList = this.setResultsList.bind(this);
   }
+
+  setResultsList() {
+    let query = React.findDOMNode(this.refs.searchInput).value.trim();
+
+    if (query.length < 3) {return;}
+
+    let matchedNames = [];
+
+    this.props.pokemonList.forEach((pokemon) => {
+      if (pokemon['name'].includes(query)) {
+        matchedNames.push(pokemon)
+      }
+    });
+
+    this.setState({searchResultsList: matchedNames})
+  }
+
 
   render() {
     return (
-      <div className="ui search" ref="searchInput">
+      <div className="ui search">
         <div className="ui icon input">
-          <input className="prompt" type="text" placeholder="Search Pokemon..."/>
+          <input onKeyUp={this.setResultsList} ref="searchInput" className="prompt" type="text" placeholder="Search Pokemon..."/>
           <i className="search icon"></i>
         </div>
-        <div className="results"></div>
+        <SearchResults pokemonList={this.state.searchResultsList} pokedex={this.props.pokedex} />
       </div>
     )
   }

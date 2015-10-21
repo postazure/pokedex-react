@@ -6,33 +6,29 @@ export default class PokemonApiClient {
     this.pokemonURI = `${host}pokemon`;
   }
 
-  getAllPokemon() {
+  getAllPokemon(state) {
     request
       .get(this.allPokemonURI)
       .end(function(err, res){
-        console.log(res.body.pokemon);
-        console.error(err);
+        let pokemon = res.body.pokemon;
+        if (pokemon) {
+          state(pokemon);
+        }
+        if (err) {console.error(err);}
     })
   }
 
-  getPokemon(name, state) {
-    let id = 1;
+  getPokemon(id, state) {
     let uri = this.pokemonURI;
-
     request
       .get(`${uri}/${id}`)
       .end(function(err, res) {
         let pokemon = res.body;
-        state(pokemon);
-        console.error(err);
+        if (pokemon) {
+          state(pokemon);
+        }
+        if (err) {console.error(err);}
     });
-
-    return(pokemon);
   };
 
-  searchPokemon(name) {
-    //TODO Remove hardcoded response with actual search method
-
-    return 1;
-  }
 }

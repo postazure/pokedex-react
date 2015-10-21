@@ -19702,20 +19702,26 @@
 	    };
 
 	    this.setPokemon = this.setPokemon.bind(this);
+	    this.setPokemonList = this.setPokemonList.bind(this);
 	  }
 
 	  _createClass(Pokedex, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.setState({
-	        activePokemon: this.pokemonApiClient.getPokemon('Bulbasaur', this.setPokemon),
-	        pokemonList: this.pokemonApiClient.getAllPokemon()
+	        activePokemon: this.pokemonApiClient.getPokemon(1, this.setPokemon),
+	        pokemonList: this.pokemonApiClient.getAllPokemon(this.setPokemonList)
 	      });
 	    }
 	  }, {
 	    key: 'setPokemon',
 	    value: function setPokemon(pokemon) {
 	      this.setState({ activePokemon: pokemon });
+	    }
+	  }, {
+	    key: 'setPokemonList',
+	    value: function setPokemonList(pokemonList) {
+	      this.setState({ pokemonList: pokemonList });
 	    }
 	  }, {
 	    key: 'render',
@@ -19728,7 +19734,7 @@
 	          null,
 	          'Hello Pokedex'
 	        ),
-	        _react2['default'].createElement(_searchSearchboxJs2['default'], { pokemonList: this.state.pokemonList }),
+	        _react2['default'].createElement(_searchSearchboxJs2['default'], { pokemonList: this.state.pokemonList, pokedex: this }),
 	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemon })
 	      );
 	    }
@@ -20153,32 +20159,30 @@
 
 	  _createClass(PokemonApiClient, [{
 	    key: 'getAllPokemon',
-	    value: function getAllPokemon() {
+	    value: function getAllPokemon(state) {
 	      _superagent2['default'].get(this.allPokemonURI).end(function (err, res) {
-	        console.log(res.body.pokemon);
-	        console.error(err);
+	        var pokemon = res.body.pokemon;
+	        if (pokemon) {
+	          state(pokemon);
+	        }
+	        if (err) {
+	          console.error(err);
+	        }
 	      });
 	    }
 	  }, {
 	    key: 'getPokemon',
-	    value: function getPokemon(name, state) {
-	      var id = 1;
+	    value: function getPokemon(id, state) {
 	      var uri = this.pokemonURI;
-
 	      _superagent2['default'].get(uri + '/' + id).end(function (err, res) {
 	        var pokemon = res.body;
-	        state(pokemon);
-	        console.error(err);
+	        if (pokemon) {
+	          state(pokemon);
+	        }
+	        if (err) {
+	          console.error(err);
+	        }
 	      });
-
-	      return pokemon;
-	    }
-	  }, {
-	    key: 'searchPokemon',
-	    value: function searchPokemon(name) {
-	      //TODO Remove hardcoded response with actual search method
-
-	      return 1;
 	    }
 	  }]);
 
@@ -21554,64 +21558,229 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _searchResults = __webpack_require__(174);
+
+	var _searchResults2 = _interopRequireDefault(_searchResults);
+
 	var Searchbox = (function (_React$Component) {
 	  _inherits(Searchbox, _React$Component);
 
-	  function Searchbox() {
+	  function Searchbox(props) {
 	    _classCallCheck(this, Searchbox);
 
-	    _get(Object.getPrototypeOf(Searchbox.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Searchbox.prototype), 'constructor', this).call(this);
+	    this.state = {
+	      searchResultsList: []
+	    };
+	    this.setResultsList = this.setResultsList.bind(this);
 	  }
 
 	  _createClass(Searchbox, [{
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var input = this.refs.searchInput;
+	    key: 'setResultsList',
+	    value: function setResultsList() {
+	      var query = _react2['default'].findDOMNode(this.refs.searchInput).value.trim();
 
-	      //input.search({source: this.props.pokemonList});
+	      if (query.length < 3) {
+	        return;
+	      }
+
+	      var matchedNames = [];
+
+	      this.props.pokemonList.forEach(function (pokemon) {
+	        if (pokemon['name'].includes(query)) {
+	          matchedNames.push(pokemon);
+	        }
+	      });
+
+	      this.setState({ searchResultsList: matchedNames });
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      return _react2["default"].createElement(
-	        "div",
-	        { className: "ui search", ref: "searchInput" },
-	        _react2["default"].createElement(
-	          "div",
-	          { className: "ui icon input" },
-	          _react2["default"].createElement("input", { className: "prompt", type: "text", placeholder: "Search Pokemon..." }),
-	          _react2["default"].createElement("i", { className: "search icon" })
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: 'ui search' },
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'ui icon input' },
+	          _react2['default'].createElement('input', { onKeyUp: this.setResultsList, ref: 'searchInput', className: 'prompt', type: 'text', placeholder: 'Search Pokemon...' }),
+	          _react2['default'].createElement('i', { className: 'search icon' })
 	        ),
-	        _react2["default"].createElement("div", { className: "results" })
+	        _react2['default'].createElement(_searchResults2['default'], { pokemonList: this.state.searchResultsList, pokedex: this.props.pokedex })
 	      );
 	    }
 	  }]);
 
 	  return Searchbox;
-	})(_react2["default"].Component);
+	})(_react2['default'].Component);
 
-	exports["default"] = Searchbox;
-	module.exports = exports["default"];
+	exports['default'] = Searchbox;
+	module.exports = exports['default'];
+
+/***/ },
+/* 173 */,
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _searchResultJs = __webpack_require__(175);
+
+	var _searchResultJs2 = _interopRequireDefault(_searchResultJs);
+
+	var SearchResults = (function (_React$Component) {
+	  _inherits(SearchResults, _React$Component);
+
+	  function SearchResults() {
+	    _classCallCheck(this, SearchResults);
+
+	    _get(Object.getPrototypeOf(SearchResults.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(SearchResults, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+
+	      var resultsList = undefined;
+
+	      if (this.props.pokemonList === []) {
+	        resultsList = _react2['default'].createElement('div', { className: 'results transition hidden' });
+	      } else {
+	        var results = this.props.pokemonList.map(function (pokemon) {
+	          return _react2['default'].createElement(_searchResultJs2['default'], { pokemon: pokemon, pokedex: _this.props.pokedex });
+	        });
+
+	        resultsList = _react2['default'].createElement(
+	          'div',
+	          { className: 'results transition visible' },
+	          results
+	        );
+	      }
+
+	      return resultsList;
+	    }
+	  }]);
+
+	  return SearchResults;
+	})(_react2['default'].Component);
+
+	exports['default'] = SearchResults;
+	module.exports = exports['default'];
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var SearchResult = (function (_React$Component) {
+	  _inherits(SearchResult, _React$Component);
+
+	  function SearchResult() {
+	    _classCallCheck(this, SearchResult);
+
+	    _get(Object.getPrototypeOf(SearchResult.prototype), 'constructor', this).apply(this, arguments);
+	  }
+
+	  _createClass(SearchResult, [{
+	    key: 'selectItem',
+	    value: function selectItem(id_url) {
+	      var id = this.getIDFromURL(id_url);
+	      var pokedex = this.props.pokedex;
+
+	      pokedex.setState({ activePokemon: pokedex.pokemonApiClient.getPokemon(id, pokedex.setPokemon) });
+	    }
+	  }, {
+	    key: 'getIDFromURL',
+	    value: function getIDFromURL(url) {
+	      var id = url.replace('api/v1/pokemon/', '').replace('/', '');
+	      return id;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var pokemon = this.props.pokemon;
+	      var id_url = pokemon.resource_uri;
+	      var name = pokemon['name'];
+
+	      return _react2['default'].createElement(
+	        'a',
+	        { className: 'result', onClick: this.selectItem.bind(this, id_url) },
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'content' },
+	          _react2['default'].createElement(
+	            'div',
+	            { className: 'title' },
+	            name
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SearchResult;
+	})(_react2['default'].Component);
+
+	exports['default'] = SearchResult;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
