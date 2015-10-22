@@ -9,7 +9,7 @@ export default class Stats extends React.Component {
     return (
       <div>
         <h3 className="ui center aligned header">Stats</h3>
-        <table className="ui celled unstackable table">
+        <table className="ui celled red unstackable table">
           <thead>
             <tr>
               <th>Attack</th>

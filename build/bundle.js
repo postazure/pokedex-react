@@ -19938,7 +19938,7 @@
 	        ),
 	        _react2["default"].createElement(
 	          "table",
-	          { className: "ui celled unstackable table" },
+	          { className: "ui celled red unstackable table" },
 	          _react2["default"].createElement(
 	            "thead",
 	            null,
@@ -22027,7 +22027,7 @@
 	        null,
 	        _react2['default'].createElement(
 	          'table',
-	          { className: 'ui celled unstackable table' },
+	          { className: 'ui celled red unstackable table' },
 	          _react2['default'].createElement(
 	            'thead',
 	            null,

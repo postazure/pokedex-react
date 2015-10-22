@@ -23,7 +23,7 @@ export default class Efficacy extends React.Component {
     }
     return(
       <div>
-        <table className="ui celled unstackable table">
+        <table className="ui celled red unstackable table">
           <thead>
           <tr>
             <th>Super Effective</th>
