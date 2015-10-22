@@ -8,16 +8,37 @@ export default class Types extends React.Component {
   constructor() {
     super();
     this.state = {
-      typeActive: false
+      typeActive: false,
+      efficacyColor: '',
+      types: []
     };
 
     this.apiClient = new PokemonApiClient;
+    this.helpers = new Helpers;
   }
 
-  handleClick(type) {
-    let helpers = new Helpers;
-    let id = helpers.getIDfromResourceURI(type.resource_uri, 'type');
+  handleClick(type, color, typeButton) {
+    this.resetTypes(type);
+
+    typeButton.setActive(true);
+    let id = this.helpers.getIDfromResourceURI(type.resource_uri, 'type');
     this.apiClient.getType(id, this.setType.bind(this));
+    this.setState({efficacyColor: color})
+  }
+
+  resetTypes(type) {
+    let activeType = type.name;
+
+    if (!this.state.typeActive) {
+      this.setState({types: []})
+      return;
+    }
+    
+    this.state.types.splice(this.state.types.indexOf(activeType), 1);
+
+    this.state.types.forEach((ref) => {
+      this.refs[ref].setActive(false);
+    });
   }
 
   setType(type) {
@@ -27,17 +48,20 @@ export default class Types extends React.Component {
   render() {
     let typesList = this.props.types || [];
     let types = typesList.map((type) => {
+      let color = this.helpers.getColorFromType(type['name']);
+      if (this.state.types.indexOf(type.name) === -1) {
+        this.state.types.push(type.name)
+      }
       return(
-        <Type type={type} onClick={this.handleClick.bind(this, type)} />
+        <Type ref={type.name} type={type} activateEfficacyTable={this.handleClick.bind(this, type, color)}/>
       )
     });
 
     return (
       <div>
-        <div className="ui horizontal bulleted link list">
-          {types}
-        </div>
-        {this.state.typeActive ? <Efficacy type={this.state.typeActive}/> : ''}
+        {types}
+        <div className="ui hidden divider"></div>
+        {this.state.typeActive ? <Efficacy color={this.state.efficacyColor} type={this.state.typeActive}/> : ''}
       </div>
     )
   }

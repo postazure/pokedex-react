@@ -1,6 +1,13 @@
 import React from 'react'
+import Helpers from '../../helpers.js'
 
 export default class Efficacy extends React.Component {
+  constructor() {
+    super();
+    this.helpers = new Helpers;
+  }
+
+
   render() {
     let superEffectiveList = this.props.type.super_effective;
     let ineffectiveList = this.props.type.ineffective;
@@ -9,6 +16,8 @@ export default class Efficacy extends React.Component {
 
     let sortedLists = [superEffectiveList.length, ineffectiveList.length, resistanceList.length, weaknessList.length].sort().reverse();
     let longestLength = sortedLists[0];
+
+    let classes = 'ui celled '+ this.props.color +' unstackable table';
 
     let trs = [];
     for(let i=0; i < longestLength; i++){
@@ -23,7 +32,7 @@ export default class Efficacy extends React.Component {
     }
     return(
       <div>
-        <table className="ui celled red unstackable table">
+        <table className={classes}>
           <thead>
           <tr>
             <th>Super Effective</th>

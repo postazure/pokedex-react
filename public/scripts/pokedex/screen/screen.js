@@ -14,6 +14,10 @@ export default class Screen extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    this.refs.typeIndex.setType(false);
+  }
+
   render() {
     let pokemon = this.props.activePokemon || this.defaultPokemon;
     let pokemonImage = this.props.pokemonImage;
@@ -23,7 +27,7 @@ export default class Screen extends React.Component {
       <div className="ui segment">
         <Picture image={pokemonImage}/>
         <h3 className="ui center aligned header">{displayNumber} {pokemon.name}</h3>
-        <Types types={pokemon.types}/>
+        <Types types={pokemon.types} ref="typeIndex"/>
         <div className="ui hidden divider"></div>
         <Stats pokemon={pokemon}/>
         <div className="ui hidden divider"></div>
