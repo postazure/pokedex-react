@@ -3,9 +3,14 @@
 }
 
 .height150 {
-  height: 150px;
+  max-height: 150px;
 }
 
 .height450 {
-  height: 450px;
+  max-height: 450px;
+}
+
+.centered {
+  margin-right: auto;
+  margin-left: auto;
 }

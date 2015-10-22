@@ -17,19 +17,17 @@ export default class Screen extends React.Component {
   render() {
     let pokemon = this.props.activePokemon || this.defaultPokemon;
     let pokemonImage = this.props.pokemonImage;
-
+    let displayNumber = '';
+    if (pokemon.pkdx_id) {displayNumber =`#${pokemon.pkdx_id}`};
     return (
       <div className="ui segment">
         <Picture image={pokemonImage}/>
-        <div className="content">
-          <a className="header">{pokemon.pkdx_id} {pokemon.name}</a>
-          <Types types={pokemon.types}/>
-          <div className="ui hidden divider"></div>
-          <Stats pokemon={pokemon}/>
-        </div>
-        <div className="extra content">
-          <Moves moves={pokemon.moves}/>
-        </div>
+        <h3 className="ui center aligned header">{displayNumber} {pokemon.name}</h3>
+        <Types types={pokemon.types}/>
+        <div className="ui hidden divider"></div>
+        <Stats pokemon={pokemon}/>
+        <div className="ui hidden divider"></div>
+        <Moves moves={pokemon.moves}/>
       </div>
     )
   }

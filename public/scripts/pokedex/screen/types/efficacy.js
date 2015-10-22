@@ -6,9 +6,8 @@ export default class Efficacy extends React.Component {
     let ineffectiveList = this.props.type.ineffective;
     let resistanceList = this.props.type.resistance;
     let weaknessList = this.props.type.weakness;
-    let noEffectList = this.props.type.no_effect;
 
-    let sortedLists = [superEffectiveList.length, ineffectiveList.length, resistanceList.length, weaknessList.length, noEffectList.length].sort().reverse();
+    let sortedLists = [superEffectiveList.length, ineffectiveList.length, resistanceList.length, weaknessList.length].sort().reverse();
     let longestLength = sortedLists[0];
 
     let trs = [];
@@ -19,19 +18,16 @@ export default class Efficacy extends React.Component {
           <td>{ineffectiveList[i] ? ineffectiveList[i].name : ''}</td>
           <td>{resistanceList[i] ? resistanceList[i].name : ''}</td>
           <td>{weaknessList[i] ? weaknessList[i].name : ''}</td>
-          <td>{noEffectList[i] ? noEffectList[i].name : ''}</td>
         </tr>
       )
     }
     return(
-
-      <div className="description">
-        <table className="ui celled small table">
+      <div>
+        <table className="ui celled unstackable table">
           <thead>
           <tr>
             <th>Super Effective</th>
             <th>Ineffective</th>
-            <th>No Effect</th>
             <th>Resistance</th>
             <th>Weakness</th>
           </tr>

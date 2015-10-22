@@ -19695,7 +19695,7 @@
 
 	    this.state = {
 	      activePokemon: {
-	        name: 'Please Search',
+	        name: '',
 	        types: [],
 	        moves: []
 	      },
@@ -19734,7 +19734,7 @@
 	    value: function render() {
 	      return _react2['default'].createElement(
 	        'div',
-	        { className: 'ui fluid segment' },
+	        { className: 'ui fluid  center aligned segment' },
 	        _react2['default'].createElement(_searchSearchboxJs2['default'], { pokemonList: this.state.pokemonList, pokedex: this }),
 	        _react2['default'].createElement(_screenScreenJs2['default'], { activePokemon: this.state.activePokemon, pokemonImage: this.state.pokemonImage })
 	      );
@@ -19806,30 +19806,26 @@
 	    value: function render() {
 	      var pokemon = this.props.activePokemon || this.defaultPokemon;
 	      var pokemonImage = this.props.pokemonImage;
-
+	      var displayNumber = '';
+	      if (pokemon.pkdx_id) {
+	        displayNumber = '#' + pokemon.pkdx_id;
+	      };
 	      return _react2['default'].createElement(
 	        'div',
 	        { className: 'ui segment' },
 	        _react2['default'].createElement(_pictureJs2['default'], { image: pokemonImage }),
 	        _react2['default'].createElement(
-	          'div',
-	          { className: 'content' },
-	          _react2['default'].createElement(
-	            'a',
-	            { className: 'header' },
-	            pokemon.pkdx_id,
-	            ' ',
-	            pokemon.name
-	          ),
-	          _react2['default'].createElement(_typesIndexJs2['default'], { types: pokemon.types }),
-	          _react2['default'].createElement('div', { className: 'ui hidden divider' }),
-	          _react2['default'].createElement(_statsJs2['default'], { pokemon: pokemon })
+	          'h3',
+	          { className: 'ui center aligned header' },
+	          displayNumber,
+	          ' ',
+	          pokemon.name
 	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: 'extra content' },
-	          _react2['default'].createElement(_movesJs2['default'], { moves: pokemon.moves })
-	        )
+	        _react2['default'].createElement(_typesIndexJs2['default'], { types: pokemon.types }),
+	        _react2['default'].createElement('div', { className: 'ui hidden divider' }),
+	        _react2['default'].createElement(_statsJs2['default'], { pokemon: pokemon }),
+	        _react2['default'].createElement('div', { className: 'ui hidden divider' }),
+	        _react2['default'].createElement(_movesJs2['default'], { moves: pokemon.moves })
 	      );
 	    }
 	  }]);
@@ -19927,12 +19923,22 @@
 	    key: "render",
 	    value: function render() {
 	      var pokemon = this.props.pokemon;
+
+	      if (pokemon.attack === undefined) {
+	        return _react2["default"].createElement("div", null);
+	      }
+
 	      return _react2["default"].createElement(
 	        "div",
-	        { className: "description" },
+	        null,
+	        _react2["default"].createElement(
+	          "h3",
+	          { className: "ui center aligned header" },
+	          "Stats"
+	        ),
 	        _react2["default"].createElement(
 	          "table",
-	          { className: "ui celled small table" },
+	          { className: "ui celled unstackable table" },
 	          _react2["default"].createElement(
 	            "thead",
 	            null,
@@ -20038,9 +20044,13 @@
 	    key: "render",
 	    value: function render() {
 	      var movesList = this.props.moves || [];
-	      var moves = movesList.map(function (move) {
+	      if (movesList.length === 0) {
+	        return _react2["default"].createElement("div", null);
+	      }
+
+	      var moves = this.props.moves.map(function (move) {
 	        return _react2["default"].createElement(
-	          "a",
+	          "div",
 	          { className: "item" },
 	          _react2["default"].createElement("i", { className: "lightning icon" }),
 	          _react2["default"].createElement(
@@ -20056,8 +20066,8 @@
 	        null,
 	        _react2["default"].createElement(
 	          "h3",
-	          null,
-	          "Moves"
+	          { className: "ui center aligned header" },
+	          "Abilities"
 	        ),
 	        _react2["default"].createElement(
 	          "div",
@@ -21981,9 +21991,8 @@
 	      var ineffectiveList = this.props.type.ineffective;
 	      var resistanceList = this.props.type.resistance;
 	      var weaknessList = this.props.type.weakness;
-	      var noEffectList = this.props.type.no_effect;
 
-	      var sortedLists = [superEffectiveList.length, ineffectiveList.length, resistanceList.length, weaknessList.length, noEffectList.length].sort().reverse();
+	      var sortedLists = [superEffectiveList.length, ineffectiveList.length, resistanceList.length, weaknessList.length].sort().reverse();
 	      var longestLength = sortedLists[0];
 
 	      var trs = [];
@@ -22010,20 +22019,15 @@
 	            'td',
 	            null,
 	            weaknessList[i] ? weaknessList[i].name : ''
-	          ),
-	          _react2['default'].createElement(
-	            'td',
-	            null,
-	            noEffectList[i] ? noEffectList[i].name : ''
 	          )
 	        ));
 	      }
 	      return _react2['default'].createElement(
 	        'div',
-	        { className: 'description' },
+	        null,
 	        _react2['default'].createElement(
 	          'table',
-	          { className: 'ui celled small table' },
+	          { className: 'ui celled unstackable table' },
 	          _react2['default'].createElement(
 	            'thead',
 	            null,
@@ -22039,11 +22043,6 @@
 	                'th',
 	                null,
 	                'Ineffective'
-	              ),
-	              _react2['default'].createElement(
-	                'th',
-	                null,
-	                'No Effect'
 	              ),
 	              _react2['default'].createElement(
 	                'th',

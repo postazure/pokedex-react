@@ -12,7 +12,7 @@ export default class Pokedex extends React.Component  {
 
     this.state = {
       activePokemon: {
-        name: 'Please Search',
+        name: '',
         types: [],
         moves: []
       },
@@ -47,7 +47,7 @@ export default class Pokedex extends React.Component  {
 
   render() {
     return (
-      <div className="ui fluid segment">
+      <div className="ui fluid  center aligned segment">
         <Search pokemonList={this.state.pokemonList} pokedex={this} />
         <Screen activePokemon={this.state.activePokemon} pokemonImage={this.state.pokemonImage}/>
       </div>

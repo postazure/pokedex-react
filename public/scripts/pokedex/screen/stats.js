@@ -3,9 +3,13 @@ import React from 'react'
 export default class Stats extends React.Component {
   render() {
     let pokemon = this.props.pokemon;
+
+    if (pokemon.attack === undefined) {return(<div></div>)}
+
     return (
-      <div className="description">
-        <table className="ui celled small table">
+      <div>
+        <h3 className="ui center aligned header">Stats</h3>
+        <table className="ui celled unstackable table">
           <thead>
             <tr>
               <th>Attack</th>

@@ -3,20 +3,22 @@ import React from 'react'
 export default class Moves extends React.Component {
   render() {
     let movesList = this.props.moves || [];
-    let moves = movesList.map(function(move) {
+    if (movesList.length === 0) {return(<div></div>)}
+
+    let moves = this.props.moves.map(function(move) {
       return(
-        <a className="item">
+        <div className="item">
           <i className="lightning icon"></i>
           <div className="content">
             {move.name}
           </div>
-        </a>
+        </div>
       );
     });
 
     return (
       <div>
-        <h3>Moves</h3>
+        <h3 className="ui center aligned header">Abilities</h3>
         <div className="ui segment scrolling height150">
           <div className="ui list">
             {moves}
